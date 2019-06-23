@@ -1,0 +1,56 @@
+
+* {
+  font-family: 'Roboto Slab', serif;
+}
+
+
+.l_dis_card {
+  width: 640px;
+  padding-left: 20%;
+  height: 825px;
+  position: fixed;
+  top: 50%;
+  left: 40%;
+  transform: translate(-50%, -50%);
+}
+
+.c_dis_card {
+  padding-left: 20px;
+  border: 1px solid #eeeeee;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  box-shadow: 0px 13px 10px -7px rgba(0, 0, 0,0.1);
+}
+
+.l_header_care {
+  padding-top: 10px;
+}
+
+.c_profile_image {
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.c_username {
+   width: 100px;
+   padding-left: 10px;
+   margin-top: 20px;
+}
+
+.l_left_side {
+  float: right;
+  padding-top: 5px;
+  padding-right: 10px;
+}
+
+.c_svg_icon {
+  padding-right: 10px;
+}
+
+.c_detail {
+  padding-left: 10px;
+  align-content: justify;
+  padding-right: 20px;
+}
