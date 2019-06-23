@@ -3,7 +3,7 @@
 Your need is the presional consultants.
 
 
-## Yourneed folder for frontend app
+## yourneed-frontend folder for frontend app
 
  - For frontend we use Vue
     ```
@@ -13,7 +13,7 @@ Your need is the presional consultants.
     ```
      yarn server
     ```
-## Yourneed-backend folder for backend app
+## yourneed-backend folder for backend app
 
   - For backend we use Django
     ```
@@ -25,11 +25,11 @@ Your need is the presional consultants.
       python manage.py startserver
       ```
      
-## Yourneed-Component folder for components build 
+## yourneed-component folder for components build 
 
    - This folder contains html and css only 
    
-## Yourneed-Page folder for each page follow the prototypes 
+## yourneed-page folder for each page follow the prototypes 
 
    - This folder contains html and css only 
    
