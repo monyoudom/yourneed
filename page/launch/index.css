@@ -1,10 +1,38 @@
-body {
-    background-color: #393D46 !important;
-    text-align: center;
-    color: #fff !important;
-    margin-top: 30% !important
+html,body {
+    font-family: 'Roboto', sans-serif;
 }
 
-p {
-    color: #fff !important;
+
+.l_wrapper {
+    display: block;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 30;
+    background-color: #393D46;
+    padding: 10px;
+}
+
+.l_container {
+    display: block;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    top: 40%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 25;
+    width: 100%;
+    -webkit-transition: all .5s;
+    transition: all .5s;
+}
+
+.c_intro {
+    color: white;
+    font-size: 24px;
 }
