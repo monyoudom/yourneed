@@ -1,10 +1,76 @@
+html,
 body {
-    background-color: #393D46 !important;
-    text-align: center;
-    color: #fff !important;
-    margin-top: 30% !important
+    background-color: #393D46;
+    font-family: 'Roboto', sans-serif;
 }
 
-p {
-    color: #fff !important;
+.l_wrapper {
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+.l_img {
+    align-content: space-between;
+    width: 50px !important;
+    height: 50px !important;
+}
+
+.l_join_us {
+    align-items: flex-end !important;
+    margin: 10px 15px;
+    color: #fff;
+}
+
+.l_card_container {
+    margin-top: 10px;
+    padding: 10px;
+    height: auto;
+    width: auto;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.l_profile {
+    border-radius: 100px;
+    width: 50px !important;
+    height: 50px !important;
+}
+
+.l_img_container {
+    display: flex;
+    flex-direction: row;
+}
+
+.l_span {
+    padding: 5px 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.l_posting_img {
+    margin-top: 5px;
+    border-radius: 5px;
+}
+
+.l_text_content {
+    text-align: justify;
+}
+
+.l_btn_container {
+    text-align: center;
+}
+
+.l_btn_style {
+    text-transform: uppercase;
+    color: white;
+    width: 200px;
+    height: 30px;
+    background-color: #393D46;
+    border-radius: 50px;
+    border-width: 0px;
 }
