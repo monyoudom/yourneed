@@ -17,6 +17,11 @@ export default {
     APIClient.query(this.query).then(res => {
         this.$store.dispatch('setRepository', res.data.results)
       })
+
+    APIClient.post(this.query).then(res => {
+        console.log(res,"+++")
+        this.$store.dispatch('setRepository', res.data.results)
+      })
   },
   methods : {
     
