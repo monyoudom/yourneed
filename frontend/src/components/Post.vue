@@ -28,7 +28,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 
 .l_warraper {
   background-color: #393d46;

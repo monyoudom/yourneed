@@ -8,8 +8,7 @@
         <div class="right">
           <img class="c_img_aboutus" src="@/assets/logo.svg"/>
 
-          <blockquote class="c_mission"> " In life,we may fact a lof of problem,But what ever might seem While there is life,there is hope.Yourneed we believe,to solve your personal problem "
-          </blockquote>
+          <blockquote class="c_mission"> "In life,we may fact a lof of problem,But what ever might seem While there is life,there is hope.Yourneed we believe,to solve your personal problem"</blockquote>
         </div>
          <h5 class="c_copy">&copy; Copy right by Yourneed</h5>
       </div>

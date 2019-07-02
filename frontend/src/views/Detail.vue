@@ -1,107 +1,97 @@
 <template>
   <v-ons-page>
-    
-    <div class="l_warraper" >
-      <v-ons-toolbar class="c_toolbar">
-        <div class="center">
-          <img class="c_logo" src="@/assets/logo.svg"/>
-        </div>
-        <div class="left">
-          <ons-toolbar-button>
-            <ons-icon @click="back" icon="arrow-left" class="c_icon__color"></ons-icon>
-          </ons-toolbar-button>
-       </div>
-      </v-ons-toolbar>
+    <v-ons-toolbar class="c_toolbar">
+      <div class="right">
+        <img class="c_logo" src="@/assets/logo.svg" />
+      </div>
+      <div class="left">
+        <ons-toolbar-button>
+          <ons-icon @click="back" icon="arrow-left" class="c_icon__color"></ons-icon>
+        </ons-toolbar-button>
+      </div>
+    </v-ons-toolbar>
+    <ons-page id="mypage">
       <div class="c_header">
-        <div class="c_title">
-          <img src="@/assets/profile.png"/>
+        <div class="c_title_detail">
+          <img src="@/assets/profile.png" />
           <div class="l_span">
-              <span class="c_name">Steve</span>
-              <span class="c_position">Conslutant.</span>
+            <span class="c_name">Steve</span>
+            <span class="c_position">Conslutant.</span>
           </div>
         </div>
       </div>
-
       <div class="l_content">
         <div class="c_content">
           <h5>What is love?</h5>
-          <p>London is the capital city of England. It is the most populous city in the  United Kingdom, with a metropolitan area of over 13 million inhabitants.
-            London is the capital city of England. It is the most populous city in the  United Kingdom, with a metropolitan area of over 13 million inhabitants
-            London is the capital city of England. It is the most populous city in the  United Kingdom, with a metropolitan area of over 13 million inhabitants
-            London is the capital city of England. It is the most populous city in the  United Kingdom, with a metropolitan area of over 13 million inhabitants
-            London is the capital city of England. It is the most populous city in the  United Kingdom, with a metropolitan area of over 13 million inhabitants
-            London is the capital city of England. It is the most populous city in the  United Kingdom, with a metropolitan area of over 13 million inhabitants
-            London is the capital city of England. It is the most populous city in the  United Kingdom, with a metropolitan area of over 13 million inhabitants
-            London is the capital city of England. It is the most populous city in the  United Kingdom, with a metropolitan area of over 13 million inhabitants
-            London is the capital city of England. It is the most populous city in the  United Kingdom, with a metropolitan area of over 13 million inhabitants
-            London is the capital city of England. It is the most populous city in the  United Kingdom, with a metropolitan area of over 13 million inhabitants
-            London is the capital city of England. It is the most populous city in the  United Kingdom, with a metropolitan area of over 13 million inhabitants
+          <p>
+            London is the capital city of England. It is the most populous city in the United Kingdom, with a metropolitan area of over 13 million inhabitants.
+            London is the capital city of England. It is the most populous city in the United Kingdom, with a metropolitan area of over 13 million inhabitants
+            London is the capital city of England. It is the most populous city in the United Kingdom, with a metropolitan area of over 13 million inhabitants
+            London is the capital city of England. It is the most populous city in the United Kingdom, with a metropolitan area of over 13 million inhabitants
+            London is the capital city of England. It is the most populous city in the United Kingdom, with a metropolitan area of over 13 million inhabitants
+            London is the capital city of England. It is the most populous city in the United Kingdom, with a metropolitan area of over 13 million inhabitants
+            London is the capital city of England. It is the most populous city in the United Kingdom, with a metropolitan area of over 13 million inhabitants
+            London is the capital city of England. It is the most populous city in the United Kingdom, with a metropolitan area of over 13 million inhabitants
+            London is the capital city of England. It is the most populous city in the United Kingdom, with a metropolitan area of over 13 million inhabitants
+            London is the capital city of England. It is the most populous city in the United Kingdom, with a metropolitan area of over 13 million inhabitants
+            London is the capital city of England. It is the most populous city in the United Kingdom, with a metropolitan area of over 13 million inhabitants
           </p>
         </div>
       </div>
-    </div>
+    </ons-page>
   </v-ons-page>
 </template>
 <script>
-
 export default {
-  name: 'Detail',
+  name: "Detail",
   data: {
-      query : "testing"
-  }, 
+    query: "testing"
+  },
   methods: {
     back() {
-      this.$router.push('home');
+      this.$router.push("home");
     }
   }
-
-}
+};
 </script>
 
-<style scoped>
-
-.l_warraper {
-  overflow: hidden;
-  background-color: #393D46;
-  width: 100%;
-}
-
+<style>
 .c_header {
   color: #393939;
   font-size: 24px;
   font-weight: bold;
   position: relative;
   width: 100%;
-  top: 40px;
+
 }
 
-.c_title {
+.c_title_detail {
   display: flex;
   text-align: left;
   padding: 22px 22px 0;
   align-items: center;
 }
 
-.c_title img {
-    border-radius: 100px;
-    width: 50px;
-    height: 50px;
+.c_title_detail img {
+  border-radius: 100px;
+  width: 50px;
+  height: 50px;
 }
 
 .l_span {
-    padding: 10px 5px;
-    display: flex;
-    flex-direction: column;
+  padding: 10px 5px;
+  display: flex;
+  flex-direction: column;
 }
 
 .c_position {
-    font-size: 10px;
-    color: #ffffff;
+  font-size: 10px;
+  color: #ffffff;
 }
 
 .c_name {
-   font-size: 15px;
-   color: #ffffff;
+  font-size: 15px;
+  color: #ffffff;
 }
 
 .c_logo {
@@ -115,7 +105,6 @@ export default {
 
 .l_content {
   padding: 20px;
-  margin-top: 70px;
   height: 100%;
 }
 
@@ -123,6 +112,7 @@ export default {
   font-size: 15px;
   text-align: justify;
   color: #ffffff;
+  padding: 10px;
 }
 
 .c_content h5 {
@@ -133,5 +123,4 @@ export default {
 .c_icon__color {
   color: white;
 }
-
 </style>

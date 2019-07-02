@@ -1,6 +1,6 @@
 <template>
   <v-ons-page>
-    <v-ons-toolbar class="c_toolbar">
+    <v-ons-toolbar>
       <div class="center">
         <img class="c_logo" src="@/assets/logo.svg" />
       </div>
@@ -10,7 +10,7 @@
         </ons-toolbar-button>
     </div>
     </v-ons-toolbar>
-    <ons-page>
+    <ons-page id="mypage">
        <div class="l_card__container">
           <div class="l_img_container">
             <img class="l_profile" src="@/assets/profile.png" alt="">
@@ -100,8 +100,13 @@ export default {
 }
 </script>
 
-<style scoped>
- 
+<style>
+
+#mypage .page__background {
+  background-color: #393D46;
+}
+
+
 .l_card__container {
   background-color: white;
   border-radius: 10px;
@@ -209,14 +214,14 @@ export default {
 .c_logo {
     width: 40px;
     height: 40px;
+    padding: 10px;
 }
 
 .c_icon__color {
   color: white;
 }
-
-.toolbar__title {
-   color: white;
+ons-toolbar.toolbar--material.toolbar {
+  background-color: #393D46;
 }
 
 </style>
