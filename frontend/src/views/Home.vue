@@ -1,38 +1,44 @@
 <template>
-   <div class="l_wrapper">
-    <h1>Welcome home</h1>
-  </div>
-  
+  <v-ons-page>
+    <v-ons-tabbar  :position="bottom" :visible="true" :tabs="tabs" :index.sync="tabIndex">
+    </v-ons-tabbar>
+  </v-ons-page>
 </template>
 
 <script>
-import APIClient from '../api/APIClient'
+import Aboutus from '../components/Aboutus'
+import NewsFeed from '../components/NewsFeed'
+import Post from '../components/Post'
 
 export default {
   name: 'home',
-  data: {
-      query : "testong"
+  data() {
+    return {
+      tabIndex: 0,
+      tabs: [
+        {
+          icon: 'fa-home',
+          page: NewsFeed,
+        },
+        {
+          icon: 'fa-plus',
+          page: Post,
+        },
+        {
+          icon: 'fa-bars',
+          page: Aboutus,
+        }
+      ]
+    }
   },
-  created () {
-    APIClient.query(this.query).then(res => {
-        this.$store.dispatch('setRepository', res.data.results)
-      })
-
-    APIClient.post(this.query).then(res => {
-        console.log(res,"+++")
-        this.$store.dispatch('setRepository', res.data.results)
-      })
+  methods: {
   },
-  methods : {
-    
-  }
+  components: { Aboutus, NewsFeed, Post },
 
 
 }
 </script>
 
 <style scoped>
-
-
-
+ 
 </style>
