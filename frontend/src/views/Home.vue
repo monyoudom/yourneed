@@ -12,7 +12,7 @@ import Post from '../components/Post'
 
 export default {
   name: 'home',
-  data() {
+  data () {
     return {
       tabIndex: 0,
       tabs: [

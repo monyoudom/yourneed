@@ -14,10 +14,6 @@
 
 export default {
    name: 'launch',
-   data: {
-      launch : launch
-    },
-
   created () {
     this.displaydetails()
   },

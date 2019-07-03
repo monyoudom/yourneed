@@ -22,9 +22,6 @@
 <script>
 export default {
   name: "Post",
-  data: {
-    query: "testing"
-  }
 };
 </script>
 

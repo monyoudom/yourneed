@@ -44,9 +44,6 @@
 <script>
 export default {
   name: "Detail",
-  data: {
-    query: "testing"
-  },
   methods: {
     back() {
       this.$router.push("home");

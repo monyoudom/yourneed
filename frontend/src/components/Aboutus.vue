@@ -20,9 +20,6 @@
 
 export default {
   name: 'Aboutus',
-  data: {
-      query : "testong"
-  }, 
 
 }
 </script>

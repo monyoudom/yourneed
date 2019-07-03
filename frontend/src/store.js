@@ -1,16 +1,16 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+
+import { NewFeed } from './stores/newfeed/newfeed.js'
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-    state: {
-
+    modules: {
+        newfeed: NewFeed
     },
-    mutations: {
-
-    },
-    actions: {
-
-    }
+    state: {},
+    mutations: {},
+    actions: {}
 })

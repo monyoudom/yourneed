@@ -19,82 +19,37 @@
               <span class="c_position">Conslutant.</span>
             </div>
           </div>
-          <p class="c_title">What is true love?</p>
+          <p class="c_title">sd</p>
           <img class="l_posting_img" src="@/assets/post.jpg" alt="">
           <div class="l_btn_container">
-            <button @click="push"> Read more </button>
+            <button> Read more </button>
           </div>
       </div>  
-      <div class="l_card__container">
-          <div class="l_img_container">
-            <img class="l_profile" src="@/assets/profile.png" alt="">
-            <div class="l_span">
-              <span class="c_name">Steve</span>
-              <span class="c_position">Conslutant.</span>
-            </div>
-          </div>
-          <p class="c_title">What is true love?</p>
-          <img class="l_posting_img" src="@/assets/post.jpg" alt="">
-          <div class="l_btn_container">
-            <button @click="push"> Read more </button>
-          </div>
-      </div> 
-      <div class="l_card__container">
-          <div class="l_img_container">
-            <img class="l_profile" src="@/assets/profile.png" alt="">
-            <div class="l_span">
-              <span class="c_name">Steve</span>
-              <span class="c_position">Conslutant.</span>
-            </div>
-          </div>
-          <p class="c_title">What is true love?</p>
-          <img class="l_posting_img" src="@/assets/post.jpg" alt="">
-          <div class="l_btn_container">
-            <button @click="push"> Read more </button>
-          </div>
-      </div> 
-      <div class="l_card__container">
-          <div class="l_img_container">
-            <img class="l_profile" src="@/assets/profile.png" alt="">
-            <div class="l_span">
-              <span class="c_name">Steve</span>
-              <span class="c_position">Conslutant.</span>
-            </div>
-          </div>
-          <p class="c_title">What is true love?</p>
-          <img class="l_posting_img" src="@/assets/post.jpg" alt="">
-          <div class="l_btn_container">
-            <button @click="push"> Read more </button>
-          </div>
-      </div> 
-      <div class="l_card__container">
-          <div class="l_img_container">
-            <img class="l_profile" src="@/assets/profile.png" alt="">
-            <div class="l_span">
-              <span class="c_name">Steve</span>
-              <span class="c_position">Conslutant.</span>
-            </div>
-          </div>
-          <p class="c_title">What is true love?</p>
-          <img class="l_posting_img" src="@/assets/post.jpg" alt="">
-          <div class="l_btn_container">
-            <button @click="push"> Read more </button>
-          </div>
-      </div>     
     </ons-page>
   </v-ons-page>
 </template>
 
 <script>
+
+import { async } from 'q';
+import { mapActions, mapGetters } from 'vuex'
+import { create } from 'domain';
+
 export default {
   name: 'NewsFeed',
-  data: {
-      query : "testong"
-  }, 
+  mounted: function () {
+    this.actionLoadNewFeed()
+  },
   methods: {
-    push() {
-      this.$router.push('detail');
-    }
+    ...mapActions({
+      actionLoadNewFeed: 'getNewfeed',
+    }),
+
+  },
+
+  create() {
+       
+      
   }
 
 }
