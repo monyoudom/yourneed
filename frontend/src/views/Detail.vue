@@ -1,6 +1,6 @@
 <template>
   <v-ons-page>
-    <v-ons-toolbar class="c_toolbar">
+    <v-ons-toolbar id="mynav">
       <div class="right">
         <img class="c_logo" src="@/assets/logo.svg" />
       </div>
@@ -15,8 +15,8 @@
         <div class="c_title_detail">
           <img src="@/assets/profile.png" />
           <div class="l_span">
-            <span class="c_name">Steve</span>
-            <span class="c_position">Conslutant.</span>
+            <span class="c_name_detail">Steve</span>
+            <span class="c_position_detail">Conslutant.</span>
           </div>
         </div>
       </div>
@@ -55,7 +55,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+
 .c_header {
   color: #393939;
   font-size: 24px;
@@ -84,23 +85,14 @@ export default {
   flex-direction: column;
 }
 
-.c_position {
+.c_position_detail {
   font-size: 10px;
   color: #ffffff;
 }
 
-.c_name {
+.c_name_detail {
   font-size: 15px;
   color: #ffffff;
-}
-
-.c_logo {
-  width: 40px;
-  height: 40px;
-}
-
-.c_toolbar {
-  background-color: #393d46;
 }
 
 .l_content {
@@ -123,4 +115,12 @@ export default {
 .c_icon__color {
   color: white;
 }
+
+.c_logo {
+    width: 40px;
+    height: 40px;
+    padding-top: 8px;
+    padding-right: 3px;
+}
+
 </style>

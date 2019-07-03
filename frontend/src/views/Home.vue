@@ -1,6 +1,6 @@
 <template>
   <v-ons-page>
-    <v-ons-tabbar  :position="bottom" :visible="true" :tabs="tabs" :index.sync="tabIndex">
+    <v-ons-tabbar   :visible="true" :tabs="tabs" :index.sync="tabIndex">
     </v-ons-tabbar>
   </v-ons-page>
 </template>
@@ -39,6 +39,7 @@ export default {
 }
 </script>
 
-<style scoped>
- 
+<style>
+
+
 </style>

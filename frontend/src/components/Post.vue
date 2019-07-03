@@ -1,8 +1,8 @@
 <template>
   <v-ons-page>
     <div class="l_warraper">
-      <v-ons-toolbar class="c_toolbar">
-        <div class="center">
+      <v-ons-toolbar id="mynav">
+        <div class="left">
           <img class="c_logo" src="@/assets/logo.svg"/>
         </div>
       </v-ons-toolbar>
@@ -34,11 +34,6 @@ export default {
   background-color: #393d46;
   width: 100%;
   height: 100%;
-}
-
-.c_logo {
-  width: 40px;
-  height: 40px;
 }
 
 .c_toolbar {
@@ -78,5 +73,12 @@ export default {
   width: 20%;
   height: 100px;
   background-color: #393939;
+}
+
+.c_logo {
+    width: 40px;
+    height: 40px;
+    padding-top: 8px;
+    padding-left: 3px;
 }
 </style>

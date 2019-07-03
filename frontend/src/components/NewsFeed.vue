@@ -1,7 +1,7 @@
 <template>
   <v-ons-page>
-    <v-ons-toolbar>
-      <div class="center">
+    <v-ons-toolbar id="mynav">
+      <div class="left">
         <img class="c_logo" src="@/assets/logo.svg" />
       </div>
       <div class="right">
@@ -100,12 +100,7 @@ export default {
 }
 </script>
 
-<style>
-
-#mypage .page__background {
-  background-color: #393D46;
-}
-
+<style scoped>
 
 .l_card__container {
   background-color: white;
@@ -207,21 +202,21 @@ export default {
     top: 5px;
 }
 
-.c_toolbar {
-  background-color: #393D46;
-}
-
 .c_logo {
     width: 40px;
     height: 40px;
-    padding: 10px;
+    padding-top: 8px;
+    padding-left: 3px;
 }
 
 .c_icon__color {
   color: white;
 }
-ons-toolbar.toolbar--material.toolbar {
-  background-color: #393D46;
+
+.c_name {
+  font-size: 15px;
+  color: black;
 }
+
 
 </style>
