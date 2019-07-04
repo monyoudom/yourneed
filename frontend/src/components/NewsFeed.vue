@@ -1,28 +1,23 @@
 <template>
   <v-ons-page>
     <v-ons-toolbar id="mynav">
-      <div class="left">
+      <div class="center">
         <img class="c_logo" src="@/assets/logo.svg" />
       </div>
-      <div class="right">
-        <ons-toolbar-button>
-          <ons-icon icon="fa-user" class="c_icon__color"></ons-icon>
-        </ons-toolbar-button>
-    </div>
     </v-ons-toolbar>
     <ons-page id="mypage">
-       <div class="l_card__container">
+       <div class="l_card__container" v-for="newfeed in newfeeds" v-bind:key="newfeed.index">
           <div class="l_img_container">
-            <img class="l_profile" src="@/assets/profile.png" alt="">
+            <img class="l_profile" :src="newfeed.img"  alt=""/>
             <div class="l_span">
               <span class="c_name">Steve</span>
               <span class="c_position">Conslutant.</span>
             </div>
           </div>
-          <p class="c_title">sd</p>
-          <img class="l_posting_img" src="@/assets/post.jpg" alt="">
+          <p class="c_title">{{newfeed.title}}</p>
+          <img class="l_posting_img" :src="newfeed.img" alt=""/>
           <div class="l_btn_container">
-            <button> Read more </button>
+            <button>Read more</button>
           </div>
       </div>  
     </ons-page>
@@ -37,19 +32,15 @@ import { create } from 'domain';
 
 export default {
   name: 'NewsFeed',
-  mounted: function () {
-    this.actionLoadNewFeed()
-  },
-  methods: {
-    ...mapActions({
-      actionLoadNewFeed: 'getNewfeed',
-    }),
 
+  data :function() {
+    return {
+      newfeeds : this.$store.getters['newfeed']
+    }
   },
 
-  create() {
-       
-      
+  created: function() {
+    console.log(this.$store.getters['newfeed'],"newfeed")
   }
 
 }
@@ -171,6 +162,7 @@ export default {
 .c_name {
   font-size: 15px;
   color: black;
+  text-align: left;
 }
 
 

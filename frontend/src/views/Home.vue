@@ -10,6 +10,7 @@ import Aboutus from '../components/Aboutus'
 import NewsFeed from '../components/NewsFeed'
 import Post from '../components/Post'
 
+
 export default {
   name: 'home',
   data () {
@@ -31,10 +32,10 @@ export default {
       ]
     }
   },
-  methods: {
-  },
-  components: { Aboutus, NewsFeed, Post },
 
+  components: { 
+    Aboutus, NewsFeed, Post 
+  },
 
 }
 </script>

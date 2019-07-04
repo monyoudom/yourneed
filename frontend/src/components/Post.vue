@@ -2,7 +2,7 @@
   <v-ons-page>
     <div class="l_warraper">
       <v-ons-toolbar id="mynav">
-        <div class="left">
+        <div class="center">
           <img class="c_logo" src="@/assets/logo.svg"/>
         </div>
       </v-ons-toolbar>

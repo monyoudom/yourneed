@@ -12,19 +12,41 @@
 
 <script>
 
+import { async } from 'q';
+import { mapActions, mapGetters } from 'vuex'
+import { create } from 'domain';
+
 export default {
-   name: 'launch',
+  name: 'launch',
   created () {
     this.displaydetails()
   },
   methods : {
-     displaydetails() {
+    ...mapActions({
+       actionLoadNewFeed: 'getNewfeed',
+    }),
+
+    displaydetails() {
         setTimeout(() => {
            this.$router.push('home');
           },2000);   
-        }
-  }
+      }
+  },
+  
+  mounted: function () {
+     this.actionLoadNewFeed()
+  },
+
+  computed: {
+    ...mapGetters({
+       newfeeds: 'newfeed',
+    }),
+
+  },
+
 }
+
+
 </script>
 
 <style scoped>

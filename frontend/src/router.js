@@ -6,18 +6,18 @@ import Detail from '../src/views/Detail'
 
 Vue.use(Router)
 
-export default new Router({
+const router =  new Router({
     mode: 'history',
     base: process.env.BASE_URL,
     routes: [{
-            path: '/',
-            name: 'launch',
-            component: Launch
-        },
-        {
             path: '/home',
             name: 'home',
             component: Home
+        },
+        {
+            path: '/',
+            name: 'launch',
+            component: Launch
         },
         {
             path: '/detail',
@@ -26,3 +26,5 @@ export default new Router({
         }
     ]
 })
+
+export default router

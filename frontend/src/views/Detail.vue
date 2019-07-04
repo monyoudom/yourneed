@@ -1,7 +1,7 @@
 <template>
   <v-ons-page>
     <v-ons-toolbar id="mynav">
-      <div class="right">
+      <div class="center">
         <img class="c_logo" src="@/assets/logo.svg" />
       </div>
       <div class="left">
