@@ -8,22 +8,74 @@
       </v-ons-toolbar>
       <div class="l_card__textarea">
         <div class="c_card__textarea">
-          <div class="c_textarea">
-            <textarea placeholder="Share your problem to reach our expert conslutant"></textarea>
-          </div>
+          <form>
+            <div class="c_textarea">
+              <textarea v-model="problem" placeholder="Share your problem to reach our expert conslutant"></textarea>
+            </div>
+            <div class="center">
+              <ons-button class="l_button" v-on:click="postProblem()">Share</ons-button>
+            </div>
+          </form>
         </div>
       </div>
-      <div class="center">
-        <ons-button class="l_button">Share</ons-button>
-      </div>
-    </div>
+     
+    </div>    
+    <v-ons-modal :visible="modalVisible" @click="modalVisible = false">
+      <p style="text-align: center">
+        Loading <v-ons-icon icon="fa-spinner" spin></v-ons-icon>
+      </p>
+    </v-ons-modal>
   </v-ons-page>
+  
 </template>
 <script>
+
+import { async } from 'q';
+import { mapActions, mapGetters } from 'vuex'
+import { create } from 'domain';
+import Loading from '../components/Loading'
+
+
+
 export default {
-  name: "Post",
+  name: "post",
+  components : {Loading},
+   data : function () {
+     return {
+      problem : null,
+      isLoading : false,
+      modalVisible: false,
+      timeoutID: 0,
+      token : null
+     }
+   },
+   methods : {
+    ...mapActions({
+       actionPost: 'postProblem',
+    }),
+
+    postProblem: function () {   
+      this.modalVisible = true;
+      this.timeoutID = setTimeout(() => this.modalVisible = false, 1000);
+      var query = { send:"False", token: window.btoa(this.problem),problem: this.problem, platform:"iOS"}
+      this.actionPost(query)
+    }
+    
+    
+  },
+  
+  computed: {
+    ...mapGetters({
+       getPost: 'getPost',
+    }),
+
+  },
 };
+
+var token_id = ""
 </script>
+
+
 
 <style>
 

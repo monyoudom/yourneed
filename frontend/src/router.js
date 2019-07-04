@@ -22,7 +22,10 @@ const router =  new Router({
         {
             path: '/detail',
             name: 'detail',
-            component: Detail
+            component: Detail,
+            props: (route) => ({
+                ...route.params
+            })
         }
     ]
 })

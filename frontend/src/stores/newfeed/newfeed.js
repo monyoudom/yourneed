@@ -1,5 +1,4 @@
 import api from '../../api/APIClient'
-import router from '../../router'
 
 
 export const NewFeed = {
@@ -26,11 +25,10 @@ export const NewFeed = {
                 //commit('ALERT_TOGGLE', res, { root: true })
                 console.log(res.status)
             }
-            console.log("api call+++",res.data.results)
-            
+            console.log("api call+++",res.data.results)  
         }
+        
     },
-
     getters: {
         newfeed: function(state) {
             const output = []

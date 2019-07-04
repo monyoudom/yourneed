@@ -17,7 +17,7 @@
           <p class="c_title">{{newfeed.title}}</p>
           <img class="l_posting_img" :src="newfeed.img" alt=""/>
           <div class="l_btn_container">
-            <button>Read more</button>
+            <button v-on:click="detail(newfeed.content)">Read more</button>
           </div>
       </div>  
     </ons-page>
@@ -41,6 +41,17 @@ export default {
 
   created: function() {
     console.log(this.$store.getters['newfeed'],"newfeed")
+  },
+
+  methods : {
+    detail: function(content) {
+        this.$router.push({
+        name: 'detail',
+        params: {
+          content : content
+        }
+      })
+    }
   }
 
 }

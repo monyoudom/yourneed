@@ -8,10 +8,10 @@ function newfeed() {
 function post(query) {
     var path = `notification/`
     return HTTP.post(path, {
-        send: 'True',
-        token: 'asdf',
-        problem: 'dfsd',
-        platform: 'iOS'
+        send: query['send'],
+        token: query['token'],
+        problem: query['problem'],
+        platform:query['platform']
     })
 }
 
