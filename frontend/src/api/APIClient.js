@@ -1,7 +1,8 @@
 import { HTTP } from './RequestType'
 
-function newfeed() {
-    var path = `post/`
+function newfeed(query) {
+    console.log(query,"testing")
+    var path = `post/?page=`+query
     return HTTP.get(path)
 }
 

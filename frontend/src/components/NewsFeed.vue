@@ -5,21 +5,31 @@
         <img class="c_logo" src="@/assets/logo.svg" />
       </div>
     </v-ons-toolbar>
-    <ons-page id="mypage">
-       <div class="l_card__container" v-for="newfeed in newfeeds" v-bind:key="newfeed.index">
+    <ons-page>
+      <ons-list id="mypage" >
+       <div class="l_card__container"  v-for="(newfeed, $index) in newfeeds" :key="$index">
           <div class="l_img_container">
-            <img class="l_profile" :src="newfeed.img"  alt=""/>
+            <img class="l_profile" :src="newfeed.profile"  alt=""/>
             <div class="l_span">
-              <span class="c_name">Steve</span>
-              <span class="c_position">Conslutant.</span>
+              <span class="c_name">{{newfeed.firstName}} {{newfeed.lastName}}</span>
+              <span class="c_position">{{newfeed.position}}</span>
             </div>
           </div>
           <p class="c_title">{{newfeed.title}}</p>
           <img class="l_posting_img" :src="newfeed.img" alt=""/>
           <div class="l_btn_container">
-            <button v-on:click="detail(newfeed.content)">Read more</button>
+            <button v-on:click="detail(newfeed.content,newfeed.title,newfeed.profile,newfeed.firstName,newfeed.lastName,newfeed.position)">Read more</button>
           </div>
-      </div>  
+      </div> 
+      <infinite-loading 
+        ref="infiniteLoading" 
+        spinner="circle"
+        @infinite="infiniteHandler"
+        infinite-scroll-disabled="busy" 
+        infinite-scroll-distance="10">
+        <span slot="no-more">No more</span>
+      </infinite-loading>
+    </ons-list >
     </ons-page>
   </v-ons-page>
 </template>
@@ -29,31 +39,60 @@
 import { async } from 'q';
 import { mapActions, mapGetters } from 'vuex'
 import { create } from 'domain';
+import Vue from 'vue'
+
+import InfiniteLoading from 'vue-infinite-loading';
 
 export default {
   name: 'NewsFeed',
-
-  data :function() {
+  components: {InfiniteLoading},
+  data() {
     return {
-      newfeeds : this.$store.getters['newfeed']
+      page : 1,
     }
-  },
-
-  created: function() {
-    console.log(this.$store.getters['newfeed'],"newfeed")
   },
 
   methods : {
-    detail: function(content) {
+
+    ...mapActions({
+       actionLoadNewFeed: 'getNewfeed',
+    }),
+  
+    detail: function(content,title,profile,firstName,lastName,position) {
         this.$router.push({
         name: 'detail',
         params: {
-          content : content
+          content : content,
+          title : title,
+          firstName: firstName,
+          lastName: lastName,
+          profile: profile,
+          position : position
         }
       })
-    }
-  }
+    }, 
 
+    infiniteHandler ($state) {
+       if(this.next != null  ) {
+          setTimeout(() => {
+            this.page += 1 
+            this.actionLoadNewFeed(this.page).then((data) => {
+                $state.loaded();
+             }) 
+      }, 1000) 
+      } else {
+          $state.complete()
+      }  
+    },
+
+  },
+
+  computed: {
+    ...mapGetters({
+       newfeeds: 'newfeed',
+       next : 'nextPage'
+    }),
+  },
 }
 </script>
 
@@ -82,9 +121,9 @@ export default {
 }
 
 .l_profile {
-    border-radius: 100px;
-    width: 50px;
-    height: 50px;
+    border-radius: 80px;
+    width: 40px;
+    height: 40px;
 }
 
 .l_img__container {
@@ -141,6 +180,7 @@ export default {
 
 .c_position {
     font-size: 10px;
+    text-align: left
 }
 
 .l_btn_container {
@@ -176,5 +216,19 @@ export default {
   text-align: left;
 }
 
+.infinite-scroll {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 680px;
+  margin: 100px 0;
+}
+
+.infinite-scroll-list-item {
+  height: 60px;
+  margin: 10px 0;
+  border-bottom: 1px solid #eaeaea;
+  padding-bottom: 10px;
+}
 
 </style>

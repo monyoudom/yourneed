@@ -13,16 +13,16 @@
     <ons-page id="mypage">
       <div class="c_header">
         <div class="c_title_detail">
-          <img src="@/assets/profile.png" />
+          <img :src="profile"/>
           <div class="l_span">
-            <span class="c_name_detail">Steve</span>
-            <span class="c_position_detail">Conslutant.</span>
+            <span class="c_name_detail">{{firstName}} {{lastName}}</span>
+            <span class="c_position_detail">{{position}}</span>
           </div>
         </div>
       </div>
       <div class="l_content">
         <div class="c_content">
-          <h5>What is love?</h5>
+          <h5>{{title}}</h5>
           <p>
            {{content}}
           </p>
@@ -35,7 +35,7 @@
 import { create } from 'domain';
 export default {
   name: "Detail",
-  props: ['content'],
+  props: ['content','title','profile','firstName','lastName','position'],
   methods: {
     back() {
       this.$router.push("home");

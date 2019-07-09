@@ -13,7 +13,6 @@ export const Post = {
     },
     actions: {
         async postProblem({ commit},payload) {
-          console.log(payload,"sds++")
             const res = await api.post(payload)
             if (res.status === 200) {
                 commit('SET_POST', { data: true })

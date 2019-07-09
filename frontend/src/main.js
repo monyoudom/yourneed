@@ -10,11 +10,13 @@ import 'onsenui/css/onsen-css-components.css';
 
 // JS import
 import VueOnsen from 'vue-onsenui'; // This imports 'onsenui', so no need to import it separately
+import InfiniteLoading from 'vue-infinite-loading';
 
 
 Vue.config.productionTip = false
 
 Vue.use(VueOnsen);
+Vue.use(InfiniteLoading, { /* options */ });
 new Vue({
     router,
     store,

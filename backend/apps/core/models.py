@@ -7,8 +7,9 @@ class ConslutantInfo(models.Model):
   first_name = models.CharField(max_length=50)
   last_name = models.CharField(max_length=50)
   profile   = models.FileField(upload_to='profile_image/')
+  position =  models.CharField(max_length=50)
   def __str__(self):
-      return str(self.users)
+      return str(self.first_name + self.last_name )
 
 class Notification(models.Model):
   send = models.BooleanField()
@@ -19,6 +20,7 @@ class Notification(models.Model):
       return self.token
 
 class Post(models.Model):
+  consultants = models.ForeignKey(ConslutantInfo, related_name='consultants', on_delete=models.CASCADE)
   title = models.CharField(max_length=100)
   content = models.TextField(max_length=1000)
   img = models.FileField(upload_to='content/')

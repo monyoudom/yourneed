@@ -1,41 +1,54 @@
 import api from '../../api/APIClient'
+import { async } from 'q';
 
 
 export const NewFeed = {
 
     state: {
-        newfeed: []
+        newfeed: [],
+        next : []
     },
     mutations: {
-        APPEND_NEWFEED(state, newfeed) {
-            state.newfeed.push(newfeed)
+        SET_NEWFEED(state, newfeed) {
+            state.newfeed.push(newfeed.data)
         },
 
-        SET_NEWFEED(state, newfeed) {
-            state.newfeed = newfeed.data
+        SET_NEXT(state, next) {
+            state.next = next.data
         }
     },
     actions: {
-        async getNewfeed({ commit }) {
-            const res = await api.newfeed()
-            res.data.results.forEach((data, index) => { data.index = index + 1 })
+        async getNewfeed({ commit },playload) {
+            console.log(playload,"playload")
+            const res = await api.newfeed(playload)
+            console.log(res.data.next)  
             if (res.status === 200) {
                 commit('SET_NEWFEED', { data: res.data.results })
+                commit('SET_NEXT', { data: res.data.next })
+                return true
             } else {
                 //commit('ALERT_TOGGLE', res, { root: true })
                 console.log(res.status)
+                return false
             }
-            console.log("api call+++",res.data.results)  
-        }
+        },
+
         
     },
     getters: {
         newfeed: function(state) {
             const output = []
             state.newfeed.forEach((data) => {
-                output.push({ index: data.index, title: data.title, content: data.content, img: data.img })
+                data.forEach((value) => {
+                    output.push({ title: value.title, content: value.content, img: value.img,firstName: value.consultants["first_name"],lastName: value.consultants["last_name"],profile:value.consultants["profile"],position: value.consultants["position"] })
+                })
+                
             })
             return output;
+        },
+
+        nextPage: function(state) {
+           return state.next
         }
 
     }

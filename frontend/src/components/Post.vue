@@ -18,15 +18,26 @@
           </form>
         </div>
       </div>
-     
     </div>    
     <v-ons-modal :visible="modalVisible" @click="modalVisible = false">
       <p style="text-align: center">
         Loading <v-ons-icon icon="fa-spinner" spin></v-ons-icon>
       </p>
     </v-ons-modal>
+    <v-ons-toast :visible.sync="toastVisible" animation="ascend">
+       Your problem have been share to our expert conslutant
+      <button @click="toastVisible = false">Ok</button>
+    </v-ons-toast>
+    <v-ons-alert-dialog modifier="rowfooter"
+      :title="'Warning'"
+      :footer="{
+        Okay: () => alertDialogVisible = false
+      }"
+      :visible.sync="alertDialogVisible"
+    >
+     {{message}}
+    </v-ons-alert-dialog>
   </v-ons-page>
-  
 </template>
 <script>
 
@@ -46,7 +57,9 @@ export default {
       isLoading : false,
       modalVisible: false,
       timeoutID: 0,
-      token : null
+      toastVisible: false,
+      alertDialogVisible: false,
+      message : 'You are not able to post any question right now'
      }
    },
    methods : {
@@ -55,12 +68,34 @@ export default {
     }),
 
     postProblem: function () {   
-      this.modalVisible = true;
-      this.timeoutID = setTimeout(() => this.modalVisible = false, 1000);
-      var query = { send:"False", token: window.btoa(this.problem),problem: this.problem, platform:"iOS"}
-      this.actionPost(query)
+
+      if (this.problem != null) {
+         if (this.problem.length < 30) {
+          this.message = "Your question invalid!"
+          this.timeoutID = setTimeout(() => this.alertDialogVisible = true)
+        } else {
+          localStorage.problem = window.btoa(this.problem)
+          if (localStorage.problem != null) {
+            this.message = "Your question have reach our Consultan!"
+            this.timeoutID = setTimeout(() => this.alertDialogVisible = true)
+          } else {
+            this.modalVisible = true;
+            var query = { send:"False", token: localStorage.problem ,problem: this.problem, platform:"iOS"}
+            this.actionPost(query)
+            this.timeoutID = setTimeout(() => this.modalVisible = false, 1000);
+            if (this.getPost) {
+              this.timeoutID = setTimeout(() => this.toastVisible = true, 1000);
+            } else {
+              this.timeoutID = setTimeout(() => this.alertDialogVisible = true)
+            }
+          }
+        }
+      } else {
+        this.message = "Please Enter your problem"
+        this.timeoutID = setTimeout(() => this.alertDialogVisible = true)
+      }
+
     }
-    
     
   },
   
@@ -70,9 +105,13 @@ export default {
     }),
 
   },
+
+  created: function() {
+    console.log(localStorage.problem,"")
+  }
 };
 
-var token_id = ""
+
 </script>
 
 

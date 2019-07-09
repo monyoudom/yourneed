@@ -6,7 +6,7 @@ from apps.core import views
 from rest_framework import routers
 
 router = routers.DefaultRouter()
-router.register(r"post", views.PostViweSet)
+router.register(r'post', views.PostViweSet, basename='post')
 router.register(r'notification', views.NotificationViweSet, basename='notification')
 urlpatterns = [
     path("api/", include(router.urls)),

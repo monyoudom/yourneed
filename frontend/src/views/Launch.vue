@@ -14,8 +14,13 @@ import Loading from '../components/Loading'
 export default {
   name: 'launch',
   components: {Loading},
+  data: function () {
+    return {
+       page : 1,
+    }
+  },
   created () {
-    this.displaydetails()
+   
   },
   methods : {
     ...mapActions({
@@ -25,19 +30,14 @@ export default {
     displaydetails() {
         setTimeout(() => {
            this.$router.push('home');
-          },2000);   
-      }
+          },3000);   
+      },
   },
   
   mounted: function () {
-     this.actionLoadNewFeed()
-  },
-
-  computed: {
-    ...mapGetters({
-       newfeeds: 'newfeed',
-    }),
-
+     this.actionLoadNewFeed(this.page).then(() => {
+        this.displaydetails()
+     })
   },
 
 }

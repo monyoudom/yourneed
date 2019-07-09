@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Launch from '../src/views/Launch'
 import Home from '../src/views/Home'
 import Detail from '../src/views/Detail'
+import  NewsFeed  from './components/NewsFeed'
 
 Vue.use(Router)
 
@@ -12,7 +13,7 @@ const router =  new Router({
     routes: [{
             path: '/home',
             name: 'home',
-            component: Home
+            component: NewsFeed
         },
         {
             path: '/',

@@ -16,12 +16,13 @@ class PostViweSet(viewsets.ModelViewSet):
    serializer_class = PostSerializer
    pagination_class = SmallPaginator
 
+  
+
 class NotificationViweSet(viewsets.ViewSet):
     def create(self, request):
         serializer = NotificationSerializer(data = request.data)
         print(serializer,"testing")
         if serializer.is_valid():
-            print("testing")
             serializer.save()
             return Response({'status': 'true'})
         else:
