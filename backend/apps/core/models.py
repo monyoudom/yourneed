@@ -14,8 +14,10 @@ class ConslutantInfo(models.Model):
 class Notification(models.Model):
   send = models.BooleanField()
   token = models.CharField(max_length=100)
+  question = models.TextField(max_length=100)
   problem = models.CharField(max_length=1000)
   platform = models.CharField(max_length=30)
+  yourneed = models.CharField(max_length=30)
   def __str__(self):
       return self.token
 

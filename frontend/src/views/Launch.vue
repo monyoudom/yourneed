@@ -19,9 +19,6 @@ export default {
        page : 1,
     }
   },
-  created () {
-   
-  },
   methods : {
     ...mapActions({
        actionLoadNewFeed: 'getNewfeed',
@@ -35,8 +32,12 @@ export default {
   },
   
   mounted: function () {
-     this.actionLoadNewFeed(this.page).then(() => {
-        this.displaydetails()
+     this.actionLoadNewFeed(this.page).then(( data ) => {
+        if(data) {
+           this.displaydetails()
+        } else {
+           console.log("errror")
+        }
      })
   },
 

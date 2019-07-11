@@ -25,7 +25,7 @@ SECRET_KEY = 'luo+dblvexxa5o62o%u!6=1*2_+ur=^wfkdehv3_0pakuzktb)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -91,6 +91,7 @@ DATABASES = {
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:8081',
     'http://localhost:8080',
+    'http://172.19.0.146:8080'
 
     
 )

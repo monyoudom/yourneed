@@ -15,9 +15,9 @@ class PostSerializer(serializers.ModelSerializer):
     consultants = ConslutantInfoSerializer(read_only=True)
     class Meta:
         model = Post
-        fields = ('consultants','title', 'content','img',)
+        fields = ('consultants','title','content','img',)
 
 class NotificationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Notification
-        fields = ('send', 'token','problem','platform',)
+        fields = ('send', 'token','question','problem','platform','yourneed')

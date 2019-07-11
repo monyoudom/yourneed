@@ -1,6 +1,9 @@
-<template>
+<template id="page1">
   <v-ons-page>
-    <v-ons-tabbar :visible="true" :tabs="tabs" :index.sync="tabIndex">
+     <v-ons-tabbar :tabs="tabs" :index.sync="tabIndex">
+      <template slot="pages">
+        <component v-for="tab in tabs" :is="tab.page" :key="tab.id" :page-stack="pageStack"></component>
+      </template>
     </v-ons-tabbar>
   </v-ons-page>
 </template>
@@ -30,9 +33,12 @@ export default {
           icon: 'fa-bars',
           page: Aboutus,
         }
-      ]
+      ],
+
     }
   },
+
+  props: ['pageStack'],
   
   components: { 
     Aboutus, NewsFeed, Post 

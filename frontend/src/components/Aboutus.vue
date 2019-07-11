@@ -1,14 +1,14 @@
 <template>
   <v-ons-page>
-    <ons-page id="mypage">
-        <div class="center">
-          <h5 style="color:#fff">About us</h5>
-        </div>
-          <img class="c_img_aboutus" src="@/assets/logo.svg"/>
-          <blockquote class="c_mission"> "In life,we may fact a lof of problem,But what ever might seem While there is life,there is hope.Yourneed we believe,to solve your personal problem"</blockquote>
+    <v-ons-toolbar id="mynav">
+      <div class="center">
+        <img class="c_logo__about" src="@/assets/logo.svg" />
+      </div>
+    </v-ons-toolbar>
+      <ons-list>
+          <blockquote class="c_mission">Yourneed.Your personal consultant.We hope to make you growth.We hope to help to help you make a right dicision</blockquote>
          <h5 class="c_copy">&copy; Copy right by Yourneed</h5>
-    </ons-page>
-
+      </ons-list>
   </v-ons-page>
 </template>
 
@@ -24,9 +24,18 @@ export default {
 <style scoped>
 
 
-.c_logo {
+.c_logo__about {
     width: 40px;
     height: 40px;
+    position: relative;
+    left: 5px;
+    top: 2px;
+}
+
+.c_head__about {
+  position: relative;
+  left : 40%;
+  top :5%;
 }
 
 .c_toolbar {
@@ -34,27 +43,57 @@ export default {
 }
 
 .c_yourneed__quot {
-  color: #ffffff;
+  color: #000;
   font-size: 15px;
 }
 
 .c_img_aboutus {
-  width: 100px;
+  width: 100%;
   height: 100px;
 }
 
-.c_mission {
+blockquote {
+  font-size: 1.4em;
+  width:60%;
+  margin:50px auto;
+  font-family:Open Sans;
+  font-style:italic;
+  color: #fff;
+  padding:1.2em 30px 1.2em 75px;
+  border-left:8px solid #fff ;
+  line-height:1.6;
+  position: relative;
+  background:#393D46;
+}
+
+blockquote::before{
+  font-family:Arial;
+  content: "\201C";
+  color:#fff;
+  font-size:4em;
+  position: absolute;
+  left: 10px;
+  top:-10px;
+}
+
+blockquote::after{
+  content: '';
+}
+
+blockquote span{
+  display:block;
+  color:#333333;
+  font-style: normal;
   font-weight: bold;
-  font-size: 15px;
-  text-align: justify;
-  color: #ffffff;
-  padding:10px
+  margin-top:1em;
 }
 
 .c_copy {
-  color: #ffffff;
+  color: #000;
   position: relative;
-  top: 40%;
+  bottom : 0;
+  margin-top: 100%;
+  left: 25%;
 }
 
 

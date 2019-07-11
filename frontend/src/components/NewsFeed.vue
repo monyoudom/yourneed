@@ -2,11 +2,21 @@
   <v-ons-page>
     <v-ons-toolbar id="mynav">
       <div class="center">
-        <img class="c_logo" src="@/assets/logo.svg" />
+        <img class="c_logo__newfeed" src="@/assets/logo.svg" />
+      </div>
+      <div class="right">
+        <v-ons-toolbar-button icon="ion-ios-bell" style="color:#fff"></v-ons-toolbar-button>
       </div>
     </v-ons-toolbar>
+    <v-ons-pull-hook
+      :action="loadItem"
+      @changestate="state = $event.state">
+      <span v-show="state === 'initial'"> Pull to refresh </span>
+      <span v-show="state === 'preaction'"> Release </span>
+      <span v-show="state === 'action'"> Loading... </span>
+    </v-ons-pull-hook>
     <ons-page>
-      <ons-list id="mypage" >
+      <ons-list style="background-color:#eee;margin-top:50px;">
        <div class="l_card__container"  v-for="(newfeed, $index) in newfeeds" :key="$index">
           <div class="l_img_container">
             <img class="l_profile" :src="newfeed.profile"  alt=""/>
@@ -43,12 +53,18 @@ import Vue from 'vue'
 
 import InfiniteLoading from 'vue-infinite-loading';
 
+import  Detail  from '../views/Detail'
+
+
+
 export default {
   name: 'NewsFeed',
   components: {InfiniteLoading},
+  props: ['pageStack'],
   data() {
     return {
       page : 1,
+      state: 'initial',
     }
   },
 
@@ -59,17 +75,14 @@ export default {
     }),
   
     detail: function(content,title,profile,firstName,lastName,position) {
-        this.$router.push({
-        name: 'detail',
-        params: {
-          content : content,
-          title : title,
-          firstName: firstName,
-          lastName: lastName,
-          profile: profile,
-          position : position
-        }
-      })
+      localStorage.setItem('content', content);
+      localStorage.setItem('title', title);
+      localStorage.setItem('firstName', firstName);
+      localStorage.setItem('lastName', lastName);
+      localStorage.setItem('profile', profile);
+      localStorage.setItem('position', position);
+      this.pageStack.push(Detail);
+     
     }, 
 
     infiniteHandler ($state) {
@@ -77,13 +90,31 @@ export default {
           setTimeout(() => {
             this.page += 1 
             this.actionLoadNewFeed(this.page).then((data) => {
+              if(data) {
                 $state.loaded();
+              } else {
+                console.log("erorr")
+              }  
              }) 
       }, 1000) 
       } else {
           $state.complete()
       }  
     },
+
+    loadItem(done) {
+      setTimeout(() => {
+        this.actionLoadNewFeed("1").then((data) => {
+              if(data) {
+                console.log("done")
+              } else {
+                console.log("erorr")
+          }  
+        }) 
+        done();
+      }, 400);
+    }
+    
 
   },
 
@@ -93,20 +124,20 @@ export default {
        next : 'nextPage'
     }),
   },
+  
 }
 </script>
 
-<style scoped>
+<style scoped> 
 
 .l_card__container {
   background-color: white;
   border-radius: 10px;
   background: #fff;
-	border: 1px solid;
-	border-color: #e5e6e9 #dfe0e4 #d0d1d5;
 	border-radius: 3px;
   min-height: 200px;
   margin-top: 10px;
+  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, .2);
 }
 
 .c_button {
@@ -114,96 +145,99 @@ export default {
 }
 
 .c_button button {
-    color: white;
-    font-size: 12px;
-    margin-right: 5px;
-    font-weight: bold;
+  color: white;
+  font-size: 12px;
+  margin-right: 5px;
+  font-weight: bold;
 }
 
 .l_profile {
-    border-radius: 80px;
-    width: 40px;
-    height: 40px;
+  border-radius: 80px;
+  width: 40px;
+  height: 40px;
 }
 
 .l_img__container {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 .l_span {
-    padding: 10px 5px;
-    display: flex;
-    flex-direction: column;
+  padding: 8px 5px;
+  display: flex;
+  flex-direction: column;
 }
 
 .l_posting__img {
-    margin-top: 5px;
-    border-radius: 5px;
-    width: 373px;
-    height: 182px;      
+  margin-top: 5px;
+  border-radius: 5px;
+  width: 373px;
+  height: 182px;      
 }
 
 .l_text__content {
-    text-align: justify;
+  text-align: justify;
 }
 
 .l_btn__container {
-    text-align: center;
+  text-align: center;
 }
 
 .l_btn__style {
-    text-transform: uppercase;
-    color: white;
-    width: 200px;
-    height: 30px;
-    background-color: #393D46;
-    border-radius: 50px;
-    border-width: 0px;
+  text-transform: uppercase;
+  color: white;
+  width: 200px;
+  height: 30px;
+  background-color: #393D46;
+  border-radius: 50px;
+  border-width: 0px;
 }
 
 .l_img_container {
-    display: flex;
-    padding: 12px;
+  display: flex;
+  padding: 12px;
 }
 
 .l_posting_img {
   width:  100%;
   height: auto;
+  border: 1px solid #eeeeee
 }
 
 .c_title {
-    margin: 0px 0px 0px 0px;
-    padding: 12px;
-    text-align: left
+  margin: 0px 0px 0px 0px;
+  padding: 12px;
+  text-align: left
 }
 
 .c_position {
-    font-size: 10px;
-    text-align: left
+  font-size: 10px;
+  text-align: left
 }
 
 .l_btn_container {
-    position: relative;
-    height: 40px;
+  position: relative;
+  height: 40px;
+  left:40%;
 }
 
 .l_btn_container button {
-    width: 96px;
-    height: 24px;
-    border: 1px solid #3e99fd;
-    border-radius: 10px;
-    color :  #3e99fd;
-    background: white;
-    position: relative;
-    top: 5px;
+  width: 96px;
+  height: 24px;
+  border: 1px solid #393D46;
+  border-radius: 10px;
+  color :  #393D46;
+  background: white;
+  position: relative;
+  top: 5px;
 }
 
-.c_logo {
-    width: 40px;
-    height: 40px;
-    padding-top: 8px;
-    padding-left: 3px;
+.c_logo__newfeed {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  left: 28px;
+  top: 2px;
 }
 
 .c_icon__color {
