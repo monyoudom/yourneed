@@ -22,7 +22,6 @@ import Home  from './views/Home';
     width: 100%;
 }
 
-
 #mypage .page__background {
   background-color: #FFF;
 }
@@ -47,7 +46,9 @@ span.back-button__icon  {
     width: 0px;
 }
 
-
-
+ons-fab.fab, ons-speed-dial-item.fab, button.fab {
+    background-color: #393D46 !important;
+    color: white !important;
+}
 
 </style>

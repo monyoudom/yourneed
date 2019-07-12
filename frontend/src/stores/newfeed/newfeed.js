@@ -10,7 +10,7 @@ export const NewFeed = {
     },
     mutations: {
         SET_NEWFEED(state, newfeed) {
-            state.newfeed.push(newfeed.data)
+            state.newfeed = newfeed.data
         },
 
         SET_NEXT(state, next) {
@@ -21,7 +21,7 @@ export const NewFeed = {
         async getNewfeed({ commit },playload) {
             console.log(playload,"playload")
             const res = await api.newfeed(playload)
-            console.log(res.data.next)  
+            console.log(res.data.results,"data new feed")  
             if (res.status === 200) {
                 commit('SET_NEWFEED', { data: res.data.results })
                 commit('SET_NEXT', { data: res.data.next })
@@ -39,10 +39,7 @@ export const NewFeed = {
         newfeed: function(state) {
             const output = []
             state.newfeed.forEach((data) => {
-                data.forEach((value) => {
-                    output.push({ title: value.title, content: value.content, img: value.img,firstName: value.consultants["first_name"],lastName: value.consultants["last_name"],profile:value.consultants["profile"],position: value.consultants["position"] })
-                })
-                
+                output.push({ title: data.title, content: data.content, img: data.img,firstName: data.consultants["first_name"],lastName: data.consultants["last_name"],profile:data.consultants["profile"],position: data.consultants["position"] })  
             })
             return output;
         },

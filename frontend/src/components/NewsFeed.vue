@@ -1,5 +1,5 @@
 <template>
-  <v-ons-page>
+  <v-ons-page id="top_element">
     <v-ons-toolbar id="mynav">
       <div class="center">
         <img class="c_logo__newfeed" src="@/assets/logo.svg" />
@@ -15,9 +15,9 @@
       <span v-show="state === 'preaction'"> Release </span>
       <span v-show="state === 'action'"> Loading... </span>
     </v-ons-pull-hook>
-    <ons-page>
-      <ons-list style="background-color:#eee;margin-top:50px;">
-       <div class="l_card__container"  v-for="(newfeed, $index) in newfeeds" :key="$index">
+    <ons-page  id="container">
+      <ons-list id="list" style="background-color:#eee;margin-top:50px;" onscro>
+       <div class="l_card__container"  v-for="(newfeed, $index) in loadData" :key="$index">
           <div class="l_img_container">
             <img class="l_profile" :src="newfeed.profile"  alt=""/>
             <div class="l_span">
@@ -36,11 +36,14 @@
         spinner="circle"
         @infinite="infiniteHandler"
         infinite-scroll-disabled="busy" 
-        infinite-scroll-distance="10">
+        infinite-scroll-distance="9">
         <span slot="no-more">No more</span>
       </infinite-loading>
     </ons-list >
     </ons-page>
+    <ons-fab position="bottom right" @click="goToTop" :style="{'display': display}">
+      <ons-icon icon="fa-angle-up"></ons-icon>
+    </ons-fab>
   </v-ons-page>
 </template>
 
@@ -50,26 +53,24 @@ import { async } from 'q';
 import { mapActions, mapGetters } from 'vuex'
 import { create } from 'domain';
 import Vue from 'vue'
-
 import InfiniteLoading from 'vue-infinite-loading';
-
 import  Detail  from '../views/Detail'
-
 
 
 export default {
   name: 'NewsFeed',
   components: {InfiniteLoading},
   props: ['pageStack'],
-  data() {
+  data: function() {
     return {
+      loadData :this.$store.getters['newfeed'],
       page : 1,
       state: 'initial',
+      display : 'none'
     }
   },
 
   methods : {
-
     ...mapActions({
        actionLoadNewFeed: 'getNewfeed',
     }),
@@ -86,14 +87,20 @@ export default {
     }, 
 
     infiniteHandler ($state) {
+      console.log(this.loadData,"why+++")
        if(this.next != null  ) {
           setTimeout(() => {
             this.page += 1 
             this.actionLoadNewFeed(this.page).then((data) => {
               if(data) {
+                this.newfeeds.forEach(element => {
+                  console.log(element,"ele+++")
+                  this.loadData.push(element)
+                });
                 $state.loaded();
+                this.display = 'block'
               } else {
-                console.log("erorr")
+                $state.error
               }  
              }) 
       }, 1000) 
@@ -113,8 +120,28 @@ export default {
         }) 
         done();
       }, 400);
-    }
+    }, 
     
+    goToTop() {
+        var options = {
+          container: '#container',
+          easing: 'ease-in',
+          offset: -60,
+          onDone: function () {
+            // this.display = 'hide'
+          },
+          onCancel: function () {
+            // scrolling has been interrupted
+          },
+          x: false,
+          y: true
+        };
+        this.$scrollTo(document.getElementById('list'), 800, options);
+      },
+
+    scrollFunction:function(e){
+        console.log(e.target.scrollTop)
+    }
 
   },
 
@@ -124,7 +151,12 @@ export default {
        next : 'nextPage'
     }),
   },
-  
+
+  created :function () {
+    console.log(this.loadData,"loadData")
+  }
+
+
 }
 </script>
 
