@@ -11,9 +11,9 @@
     <v-ons-pull-hook
       :action="loadItem"
       @changestate="state = $event.state">
-      <span v-show="state === 'initial'"> Pull to refresh </span>
-      <span v-show="state === 'preaction'"> Release </span>
-      <span v-show="state === 'action'"> Loading... </span>
+      <span v-show="state === 'initial'"> ទទួលយកអត្ថបទថ្មី </span>
+      <span v-show="state === 'preaction'"> អត្ថបទថ្មី </span>
+      <span v-show="state === 'action'"> កំពុងទាញយក </span>
     </v-ons-pull-hook>
     <ons-page  id="container">
       <ons-list id="list" style="background-color:#eee;margin-top:50px;" onscro>
@@ -28,7 +28,7 @@
           <p class="c_title">{{newfeed.title}}</p>
           <img class="l_posting_img" :src="newfeed.img" alt=""/>
           <div class="l_btn_container">
-            <button v-on:click="detail(newfeed.content,newfeed.title,newfeed.profile,newfeed.firstName,newfeed.lastName,newfeed.position)">Read more</button>
+            <button v-on:click="detail(newfeed.content,newfeed.title,newfeed.profile,newfeed.firstName,newfeed.lastName,newfeed.position)">បន្តការអាន</button>
           </div>
       </div> 
       <infinite-loading 
@@ -37,13 +37,15 @@
         @infinite="infiniteHandler"
         infinite-scroll-disabled="busy" 
         infinite-scroll-distance="9">
-        <span slot="no-more">No more</span>
+        <span slot="no-more">គ្មានអត្ថបទ</span>
       </infinite-loading>
     </ons-list >
     </ons-page>
-    <ons-fab position="bottom right" @click="goToTop" :style="{'display': display}">
+    <div :style="{'display': display}">
+      <ons-fab position="bottom right" @click="goToTop">
       <ons-icon icon="fa-angle-up"></ons-icon>
     </ons-fab>
+    </div> 
   </v-ons-page>
 </template>
 
@@ -94,7 +96,6 @@ export default {
             this.actionLoadNewFeed(this.page).then((data) => {
               if(data) {
                 this.newfeeds.forEach(element => {
-                  console.log(element,"ele+++")
                   this.loadData.push(element)
                 });
                 $state.loaded();
@@ -113,22 +114,23 @@ export default {
       setTimeout(() => {
         this.actionLoadNewFeed("1").then((data) => {
               if(data) {
-                console.log("done")
+                this.loadData = this.newfeeds
               } else {
                 console.log("erorr")
-          }  
+            }  
         }) 
         done();
       }, 400);
     }, 
     
     goToTop() {
+        var self = this
         var options = {
           container: '#container',
           easing: 'ease-in',
           offset: -60,
           onDone: function () {
-            // this.display = 'hide'
+            self.display = 'none'
           },
           onCancel: function () {
             // scrolling has been interrupted

@@ -17,12 +17,12 @@
               {{ item.text }}
             </option>
           </v-ons-select>
-            <input class="c_question" placeholder="Your problem quesiton?" v-model="question"/>
+            <input class="c_question" placeholder="តេីអ្នកមានបញ្ហាអ្វីដែលគិតថាពួកយេីងអាចជួយបាន?" v-model="question"/>
             <div class="c_textarea">
-              <textarea v-model="problem" placeholder="Share your problem detail to reach our expert conslutant"></textarea>
+              <textarea v-model="problem" placeholder="សូមធ្វេីការៀបរាបន្ថែម"></textarea>
             </div>
           <div class="l_btn_container">
-            <button v-on:click="postProblem()">Share now</button>
+            <button v-on:click="postProblem()" type="submit">ធ្វេីការចែករំលែក</button>
           </div>
           </form>
         </div>
@@ -31,15 +31,15 @@
     </div>    
     <v-ons-modal :visible="modalVisible" @click="modalVisible = false">
       <p style="text-align: center">
-        Loading <v-ons-icon icon="fa-spinner" spin></v-ons-icon>
+        កំពុងទាញយក <v-ons-icon icon="fa-spinner" spin></v-ons-icon>
       </p>
     </v-ons-modal>
     <v-ons-toast :visible.sync="toastVisible" animation="ascend">
-       Your problem have been share to our expert conslutant
-      <button @click="toastVisible = false">Ok</button>
+       បញ្ហារបស់អ្នកបានទៅដល់អ្នកពិគ្រោះយោបល់
+      <button @click="toastVisible = false">យល់ព្រម</button>
     </v-ons-toast>
     <v-ons-alert-dialog modifier="rowfooter"
-      :title="'Warning'"
+      :title="'សូមអភ័យទេាស'"
       :footer="{
         Okay: () => alertDialogVisible = false
       }"
@@ -47,6 +47,7 @@
     >
      {{message}}
     </v-ons-alert-dialog>
+    <loading v-if="loading"></loading>
   </v-ons-page>
 </template>
 <script>
@@ -71,10 +72,11 @@ export default {
       alertDialogVisible: false,
       message : 'You are not able to post any question right now',
       items: [
-        { text: 'General', value: 'general' },
-        { text: 'Consultant', value: 'consultant' }
+        { text: 'បញ្ហាទូទៅ', value: 'general' },
+        { text: 'បញ្ហាផ្ទាល់ខ្លួន', value: 'consultant' }
       ],
-      selectedItem: 'general'
+      selectedItem: 'general',
+      loading : false, 
      }
    },
    methods : {
@@ -83,19 +85,23 @@ export default {
     }),
 
     postProblem: function () {   
-      if (this.problem != null) {
-         if (this.problem.length < 30) {
-          this.message = "Your question invalid!"
+      window.event.preventDefault()
+      this.loading = true
+      if (this.problem.length != 0 & this.question.length != 0 ) {
+         if ( localStorage.problem != null) {
+           this.message = "អ្នកធ្លាប់បានសួរម្តងរួចមកហេីយ សូមធ្វេីការងចំា"
           this.timeoutID = setTimeout(() => this.alertDialogVisible = true)
+          this.loading = false
         } else {
-          if (localStorage.problem != null) {
-            localStorage.problem = window.btoa(this.problem)
-            this.message = "Wait till they reply,After you close this question, then you can able to ask other question"
+          if (this.problem.length < 30 ) {
+            this.message = "សូមធ្វេីការៀបរាបន្ថែមយ៉ាងតិចឳ្យបាន ៣០ពាក្យ"
             this.timeoutID = setTimeout(() => this.alertDialogVisible = true)
+            this.loading = false
           } else {
-            this.message = "Your question have reach our Consultan!"
+            localStorage.problem = window.btoa(this.problem)
+            this.message = "បញ្ហារបស់អ្នកបានទៅដល់អ្នកពិគ្រោះយោបល់ដេាយជេាកជ័យ"
             this.modalVisible = true;
-            var query = { send:"False", token: localStorage.problem ,problem: this.problem, platform:"iOS"}
+            var query = { send:"False", token: localStorage.problem,question:this.question ,problem: this.problem, platform:"iOS",yourneed: selectedItem}
             this.actionPost(query).then((data) => {
               this.timeoutID = setTimeout(() => this.modalVisible = false, 1000);
               if (this.getPost) {
@@ -103,15 +109,18 @@ export default {
               } else {
                   this.timeoutID = setTimeout(() => this.alertDialogVisible = true)
               }
+              this.loading = true
             })
           }
         }
       } else {
-        this.message = "Please Enter your problem"
+        this.loading = true
+        this.message = "តេីអ្នកមានបញ្ហាអ្វីដែលគិតថាពួកយេីងអាចជួយបាន?"
         this.timeoutID = setTimeout(() => this.alertDialogVisible = true)
       }
 
-    }
+    },
+
     
   },
   

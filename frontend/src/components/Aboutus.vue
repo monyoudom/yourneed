@@ -6,8 +6,8 @@
       </div>
     </v-ons-toolbar>
       <ons-list>
-          <blockquote class="c_mission">Yourneed.Your personal consultant.We hope to make you growth.We hope to help to help you make a right dicision</blockquote>
-         <h5 class="c_copy">&copy; Copy right by Yourneed</h5>
+          <blockquote class="c_mission">Yourneed គឺជាអ្នកពិគ្រោះយោបល់របស់អ្នក យេីងសង្ឈឹមថានិងជួយអ្នកឳ្យមានការីកចម្រេីន</blockquote>
+         <h5 class="c_copy">&copy; រក្សាដេាយ Yourneed</h5>
       </ons-list>
   </v-ons-page>
 </template>

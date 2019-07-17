@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import (ConslutantInfo,Notification,Post)
-from .serializers import (PostSerializer,NotificationSerializer)
+from .serializers import (PostSerializer,NotificationSerializer,ResultsSerializer)
 
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -21,7 +21,6 @@ class PostViweSet(viewsets.ModelViewSet):
 class NotificationViweSet(viewsets.ViewSet):
     def create(self, request):
         serializer = NotificationSerializer(data = request.data)
-        print(serializer,"testing")
         if serializer.is_valid():
             serializer.save()
             return Response({'status': 'true'})
@@ -29,6 +28,16 @@ class NotificationViweSet(viewsets.ViewSet):
             return Response(serializer.errors,
                             status=status.HTTP_400_BAD_REQUEST)
 
+
+# class ResultsViweSet(viewsets.ViewSet):
+#     def create(self, request):
+#         serializer = NotificationSerializer(data = request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response({'status': 'true'})
+#         else:
+#             return Response(serializer.errors,
+#                             status=status.HTTP_400_BAD_REQUEST)
 
 
 

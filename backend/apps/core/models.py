@@ -18,6 +18,7 @@ class Notification(models.Model):
   problem = models.CharField(max_length=1000)
   platform = models.CharField(max_length=30)
   yourneed = models.CharField(max_length=30)
+  created = models.DateField(auto_now=False,auto_now_add=True)
   def __str__(self):
       return self.token
 
@@ -30,6 +31,12 @@ class Post(models.Model):
   def __str__(self):
       return self.title
 
+class Results(models.Model):
+  notification = models.ForeignKey(Notification,on_delete=models.CASCADE)
+  anwsers  = models.TextField(max_length=1000)
+  respone  = models.CharField(max_length=200)
+  close    = models.BooleanField()
+  created = models.DateField(auto_now=False,auto_now_add=True)
 
 
 

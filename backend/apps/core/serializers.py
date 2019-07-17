@@ -1,9 +1,10 @@
 from .models import (
    ConslutantInfo,
    Notification,
-   Post
-
+   Post,
+   Results
 )
+
 from rest_framework import serializers
 
 class ConslutantInfoSerializer(serializers.ModelSerializer):
@@ -21,3 +22,8 @@ class NotificationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Notification
         fields = ('send', 'token','question','problem','platform','yourneed')
+
+class ResultsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Notification
+        fields = ('notification', 'anwsers','respone','close')
