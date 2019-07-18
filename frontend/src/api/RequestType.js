@@ -1,9 +1,9 @@
 import Axios from 'axios'
 
 export const HTTP = Axios.create({
-    baseURL: ` http://127.0.0.1:8000/api/`,
+    baseURL: `https://thongmonyoudom.pythonanywhere.com/api/`,
     headers: {
       'Content-Type': 'application/json',
-      'Authorization' :'Token 4a357e5e5c5949d69383998ab2ce44848acce73a'
+      'Authorization' :'Token 5c9950000f2f631baaaef031e5fbb95b51bbb5e6'
     }
 })

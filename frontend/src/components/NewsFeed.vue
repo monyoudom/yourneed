@@ -8,15 +8,15 @@
         <v-ons-toolbar-button icon="ion-ios-bell" style="color:#fff"></v-ons-toolbar-button>
       </div>
     </v-ons-toolbar>
-    <v-ons-pull-hook
+    <ons-page  id="container">
+      <v-ons-pull-hook
       :action="loadItem"
       @changestate="state = $event.state">
       <span v-show="state === 'initial'"> ទទួលយកអត្ថបទថ្មី </span>
       <span v-show="state === 'preaction'"> អត្ថបទថ្មី </span>
       <span v-show="state === 'action'"> កំពុងទាញយក </span>
     </v-ons-pull-hook>
-    <ons-page  id="container">
-      <ons-list id="list" style="background-color:#eee;margin-top:50px;" onscro>
+      <ons-list id="list" style="background-color:#eee;" onscro>
        <div class="l_card__container"  v-for="(newfeed, $index) in loadData" :key="$index">
           <div class="l_img_container">
             <img class="l_profile" :src="newfeed.profile"  alt=""/>
@@ -89,7 +89,6 @@ export default {
     }, 
 
     infiniteHandler ($state) {
-      console.log(this.loadData,"why+++")
        if(this.next != null  ) {
           setTimeout(() => {
             this.page += 1 
@@ -99,9 +98,10 @@ export default {
                   this.loadData.push(element)
                 });
                 $state.loaded();
+               
                 this.display = 'block'
               } else {
-                $state.error
+                 $state.error('គ្មានអត្ថបទ')
               }  
              }) 
       }, 1000) 
@@ -145,6 +145,7 @@ export default {
         console.log(e.target.scrollTop)
     }
 
+
   },
 
   computed: {
@@ -170,7 +171,6 @@ export default {
   background: #fff;
 	border-radius: 3px;
   min-height: 200px;
-  margin-top: 10px;
   box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, .2);
 }
 
@@ -270,8 +270,8 @@ export default {
   width: 40px;
   height: 40px;
   position: relative;
-  left: 28px;
-  top: 2px;
+  left: 23px;
+  top: 3px;
 }
 
 .c_icon__color {

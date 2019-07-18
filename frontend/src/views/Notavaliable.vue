@@ -6,7 +6,7 @@
       </div>
     </v-ons-toolbar>
       <ons-list>
-          <blockquote class="c_mission">Yourneed គឺជាអ្នកពិគ្រោះយោបល់របស់អ្នក យេីងសង្ឈឹមថានិងជួយអ្នកឳ្យមានការីកចម្រេីន</blockquote>
+          <blockquote class="c_mission">សូមអភ័យទេាស Yourneed support only for mobile</blockquote>
          <h5 class="c_copy">&copy; រក្សាដេាយ Yourneed</h5>
       </ons-list>
   </v-ons-page>
@@ -15,13 +15,14 @@
 <script>
 
 export default {
-  name: 'Aboutus',
+  name: 'Notavaliable',
 
 }
 </script>
 
 
 <style scoped>
+
 
 .c_logo__about {
     width: 40px;

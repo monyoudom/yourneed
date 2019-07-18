@@ -17,9 +17,9 @@
               {{ item.text }}
             </option>
           </v-ons-select>
-            <input class="c_question" placeholder="តេីអ្នកមានបញ្ហាអ្វីដែលគិតថាពួកយេីងអាចជួយបាន?" v-model="question"/>
+            <input type="input" class="c_question" placeholder="តេីអ្នកមានបញ្ហាអ្វីដែលគិតថាពួកយេីងអាចជួយបាន?" v-model="question"/>
             <div class="c_textarea">
-              <textarea v-model="problem" placeholder="សូមធ្វេីការៀបរាបន្ថែម"></textarea>
+              <textarea type="input" v-model="problem" placeholder="សូមធ្វេីការៀបរាបន្ថែម"></textarea>
             </div>
           <div class="l_btn_container">
             <button v-on:click="postProblem()" type="submit">ធ្វេីការចែករំលែក</button>
@@ -39,7 +39,7 @@
       <button @click="toastVisible = false">យល់ព្រម</button>
     </v-ons-toast>
     <v-ons-alert-dialog modifier="rowfooter"
-      :title="'សូមអភ័យទេាស'"
+      :title="title"
       :footer="{
         Okay: () => alertDialogVisible = false
       }"
@@ -77,6 +77,7 @@ export default {
       ],
       selectedItem: 'general',
       loading : false, 
+      title : "សូមអភ័យទេាស"
      }
    },
    methods : {
@@ -87,7 +88,13 @@ export default {
     postProblem: function () {   
       window.event.preventDefault()
       this.loading = true
-      if (this.problem.length != 0 & this.question.length != 0 ) {
+      if (this.problem == null & this.question == null) {
+        this.loading = true
+        this.message = "តេីអ្នកមានបញ្ហាអ្វីដែលគិតថាពួកយេីងអាចជួយបាន?"
+        this.timeoutID = setTimeout(() => this.alertDialogVisible = true)
+       
+      } else {
+        if (this.problem.length != 0 & this.question.length != 0 ) {
          if ( localStorage.problem != null) {
            this.message = "អ្នកធ្លាប់បានសួរម្តងរួចមកហេីយ សូមធ្វេីការងចំា"
           this.timeoutID = setTimeout(() => this.alertDialogVisible = true)
@@ -99,6 +106,7 @@ export default {
             this.loading = false
           } else {
             localStorage.problem = window.btoa(this.problem)
+            this.title = "ជេាកជ័យ"
             this.message = "បញ្ហារបស់អ្នកបានទៅដល់អ្នកពិគ្រោះយោបល់ដេាយជេាកជ័យ"
             this.modalVisible = true;
             var query = { send:"False", token: localStorage.problem,question:this.question ,problem: this.problem, platform:"iOS",yourneed: selectedItem}
@@ -118,6 +126,8 @@ export default {
         this.message = "តេីអ្នកមានបញ្ហាអ្វីដែលគិតថាពួកយេីងអាចជួយបាន?"
         this.timeoutID = setTimeout(() => this.alertDialogVisible = true)
       }
+      }
+      
 
     },
 
@@ -234,4 +244,12 @@ export default {
     position: relative;
     right: 30px;
   }
+
+
+@media screen and (-webkit-min-device-pixel-ratio:0) { 
+  textarea,
+  input {
+    font-size: 16px;
+  }
+}
 </style>

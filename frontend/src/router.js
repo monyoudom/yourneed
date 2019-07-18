@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Launch from '../src/views/Launch'
 import Navigation from '../src/views/Navigation'
-import Detail from '../src/views/Detail'
+import Install from '../src/views/Install'
 
 Vue.use(Router)
 
@@ -18,6 +18,11 @@ const router =  new Router({
             path: '/',
             name: 'launch',
             component: Launch
+        },
+        {
+            path:'/install',
+            name: 'install',
+            component : Install
         }
     ]
 })

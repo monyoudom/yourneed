@@ -10,6 +10,7 @@ import { async } from 'q';
 import { mapActions, mapGetters } from 'vuex'
 import { create } from 'domain';
 import Loading from '../components/Loading'
+import { isMobile } from 'mobile-device-detect';
 
 export default {
   name: 'launch',
@@ -26,20 +27,30 @@ export default {
 
     displaydetails() {
         setTimeout(() => {
-           this.$router.push('home');
+            this.$router.push('home');
           },3000);   
       },
   },
   
   mounted: function () {
-     this.actionLoadNewFeed(this.page).then(( data ) => {
-        if(data) {
-           this.displaydetails()
-        } else {
-           console.log("errror")
-        }
-     })
-  },
+     
+     if (window.matchMedia('(display-mode: standalone)').matches) {  
+         this.actionLoadNewFeed(this.page).then(( data ) => {
+            if(data) {
+               this.displaydetails()
+            } else {
+               console.log("errror")
+            }
+               })
+      } else {
+         if(isMobile) {
+            this.$router.push('install')
+           } else {
+            this.$router.push('home');
+           }
+      }
+     
+   }
 
 }
 
